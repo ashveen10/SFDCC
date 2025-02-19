@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style type='text/css'>
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            background-color: #005290;
+            font-family: "Arial", sans-serif;
+        }
+        .embeddedServiceHelpButton .helpButton .uiButton:focus {
+            outline: 1px solid #005290;
+        }
+    </style>
+    
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+        var initESW = function(gslbBaseURL) {
+            embedded_svc.settings.displayHelpButton = true;
+            embedded_svc.settings.language = '';
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+    
+            embedded_svc.init(
+                'https://fun-ruby-6842--dev.sandbox.my.salesforce.com',
+                'https://fun-ruby-6842--dev.sandbox.my.site.com', // Fixed URL
+                gslbBaseURL,
+                '00DD7000000o4s9', // Deployment ID
+                '573bf0000001BPd', // Correct Button ID
+                {
+                    baseLiveAgentContentURL: 'https://c.la12s-core1.sfdc-yfeipo.salesforceliveagent.com/content',
+                    deploymentId: '572bf0000006RGr',
+                    buttonId: '573bf0000001BPd',
+                    baseLiveAgentURL: 'https://d.la12s-core1.sfdc-yfeipo.salesforceliveagent.com/chat',
+                    eswLiveAgentDevName: 'Chat_Team',
+                    isOfflineSupportEnabled: false
+                }
+            );
+        };
+    
+        if (!window.embedded_svc) {
+            var s = document.createElement('script');
+            s.setAttribute('src', 'https://fun-ruby-6842--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+            s.onload = function() {
+                initESW(null);
+            };
+            document.body.appendChild(s);
+        } else {
+            initESW('https://service.force.com');
+        }
+    </script>
+</body>
+</html>
